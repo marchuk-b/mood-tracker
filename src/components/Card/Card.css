@@ -7,6 +7,27 @@
     background-color: #FF843E;
     color: #782E04;
 }
+.card.upset {
+    background-color: #8CA4EE;
+    color: #313A54;
+}
+.card.sad {
+    background-color: #A1E7EB;
+    color: #3A7478;
+}
+.card.good {
+    background-color: #FDDD6F;
+    color: #664F00;
+}
+.card.happy {
+    background-color: #DFEBFF;
+    color: #505D87;
+}
+.card.spectacular {
+    background-color: #FFA7BC;
+    color: #4D3238;
+}
+
 .card__text {
     font-size: 36px;
     padding-top: 45px;
