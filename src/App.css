@@ -1,0 +1,29 @@
+body {
+    background: #d8d8d8;
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.App {
+    max-width: 375px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    padding: 10px 0;
+    background-color: #FFEFE5;
+    border-bottom: 3px solid #754242;
+}
+.header__link {
+    color: #754242;
+    font-size: 24px;
+    text-decoration: none;
+}

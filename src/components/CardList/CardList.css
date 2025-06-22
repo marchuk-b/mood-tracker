@@ -1,0 +1,6 @@
+.cardlist {
+    padding: 40px 0;
+}
+.cardlist.angry {
+    background-color: #FFEFE5;
+}

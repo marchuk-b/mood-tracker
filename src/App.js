@@ -1,9 +1,14 @@
 import './App.css';
+import { CardList } from './components/CardList/CardList';
 
 function App() {
   return (
     <div className="App">
-      Hello World!
+      <header className='header'>
+        <a href='/' className='header__link'>Mood Tracker</a>
+      </header>
+
+      <CardList />
     </div>
   );
 }
