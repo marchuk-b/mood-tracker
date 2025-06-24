@@ -6,6 +6,33 @@ export const CardCarousel = ({cardsData}) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [activeElement, setActiveElement] = useState(cardsData[slideIndex]);
 
+  const saveMood = (selectedCard) => {
+    try {
+      const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || []; 
+      const dateToday = new Date().toISOString().split("T")[0];
+
+      const existingMoodToday = moodsFromStorage.filter((mood) => {
+        return mood.date === dateToday;
+      })
+
+      if (existingMoodToday.length !== 0) {
+        return alert("Today you already choosed your mood");
+      }
+
+      const selectedMood = {
+        mood: selectedCard.name,
+        note: '',
+        date: dateToday,
+      };
+
+      moodsFromStorage.push(selectedMood);
+      localStorage.setItem("moodEntries", JSON.stringify(moodsFromStorage));
+      alert("Mood saved successfully!")
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className={`carousel ${activeElement.className || ''}`}>
       <div className="container">
@@ -33,7 +60,7 @@ export const CardCarousel = ({cardsData}) => {
             </div>
           ))}
         </div>
-        <button className='carousel__btn'>Select mood</button>
+        <button className='carousel__btn' onClick={() => saveMood(activeElement)}>Select mood</button>
       </div>
     </div>
   )
