@@ -12,7 +12,7 @@ export const Card = ({data}) => {
         <div className="card__text">How are you feeling today?</div>
         <div className="card-emotion">
             <div className="card-emotion__name">{data.name}</div>
-            <img className="card-emotion__emoji" src={data.emoji} />
+            <img className="card-emotion__emoji" src={data.emoji} alt='' />
         </div>
     </div>
   )
