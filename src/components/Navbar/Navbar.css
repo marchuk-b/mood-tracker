@@ -1,0 +1,24 @@
+.navbar {
+    padding: 20px 0;
+    text-align: center;
+    background-color: #754242;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.navbar__link {
+    display: block;
+    background-color: #FFEFE5;
+    color: #754242;
+    font-size: 24px;
+    font-weight: 500;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all .3s linear;
+}
+.navbar__link:hover {
+    background-color: #b48577;
+    color: #FFEFE5;
+}
