@@ -27,3 +27,28 @@ body {
     font-size: 24px;
     text-decoration: none;
 }
+
+.angry {
+    background-color: #FF843E;
+    color: #782E04;
+}
+.upset {
+    background-color: #8CA4EE;
+    color: #313A54;
+}
+.sad {
+    background-color: #A1E7EB;
+    color: #3A7478;
+}
+.good {
+    background-color: #FDDD6F;
+    color: #664F00;
+}
+.happy {
+    background-color: #DFEBFF;
+    color: #505D87;
+}
+.spectacular {
+    background-color: #FFA7BC;
+    color: #4D3238;
+}

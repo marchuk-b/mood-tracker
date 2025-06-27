@@ -8,9 +8,9 @@ function App() {
   return (
     <div className="app">
       <div className='container'>
-        <header className='header'>
+        {/* <header className='header'>
           <a href='/' className='header__link'>Mood Tracker</a>
-        </header>
+        </header> */}
     
         <main className='main'>
           <Routes>

@@ -1,0 +1,81 @@
+.mainpage {
+    padding: 40px 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mainpage.angry {
+    background-color: #FFEFE5;
+}
+.mainpage.upset {
+    background-color: #EBF0FF;
+}
+.mainpage.sad {
+    background-color: #EDFEFF;
+}
+.mainpage.good {
+    background-color: #FFFBED;
+}
+.mainpage.happy {
+    background-color: #F5F9FF;
+}
+.mainpage.spectacular {
+    background-color: #FFF0F3;
+}
+
+
+.carousel__btn {
+    display: block;
+    max-width: 335px;
+    width: 100%;
+    height: 50px;
+    background-color: #29262A;
+    color: #E6F5F0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 100px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.input-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    max-width: 335px;
+    width: 100%;
+}
+.input-text__input {
+    resize: none;
+    width: 100%;
+    height: 200px;
+    padding: 15px 20px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    border-radius: 24px;
+    margin-bottom: 10px;
+}
+.input-text__input:focus {
+    outline: 2px solid #29262A;
+}
+
+.mainpage-moodcard {
+    border-radius: 24px;
+    padding: 20px 0 10px;
+    max-width: 335px;
+    width: 100%;
+    text-align: center;
+}
+.mainpage-moodcard__title {
+    font-size: 24px;
+}
+.mainpage-moodcard__name {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 10px 0 5px;
+}
+.mainpage-moodcard__img {
+    max-width: 100px;
+}
