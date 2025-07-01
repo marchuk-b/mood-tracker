@@ -4,25 +4,6 @@
     flex-direction: column;
     align-items: center;
 }
-.mainpage.angry {
-    background-color: #FFEFE5;
-}
-.mainpage.upset {
-    background-color: #EBF0FF;
-}
-.mainpage.sad {
-    background-color: #EDFEFF;
-}
-.mainpage.good {
-    background-color: #FFFBED;
-}
-.mainpage.happy {
-    background-color: #F5F9FF;
-}
-.mainpage.spectacular {
-    background-color: #FFF0F3;
-}
-
 
 .carousel__btn {
     display: block;
@@ -78,4 +59,26 @@
 }
 .mainpage-moodcard__img {
     max-width: 100px;
+}
+
+.mainpage-moodcard__note {
+    display: flex;
+    flex-direction: column;
+    max-width: 335px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 24px;
+    padding: 20px;
+
+    background-color: #e7e5de;
+    color: #29262A;
+}
+.mainpage-moodcard__note-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.mainpage-moodcard__note-text {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 400;
 }

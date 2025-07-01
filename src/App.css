@@ -1,5 +1,4 @@
 body {
-    background: #d8d8d8;
     font-family: "Rubik", sans-serif;
     font-weight: 800;
 }
@@ -15,6 +14,15 @@ body {
     width: 100%;
     margin: 0 auto;
 }
+.app {
+    height: 100%;
+}
+.app__content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
 
 .header {
     padding: 10px 0;
@@ -26,6 +34,12 @@ body {
     color: #754242;
     font-size: 24px;
     text-decoration: none;
+}
+.main {
+    flex: 1;
+}
+.footer {
+    margin-top: auto;
 }
 
 .angry {
@@ -51,4 +65,23 @@ body {
 .spectacular {
     background-color: #FFA7BC;
     color: #4D3238;
+}
+
+.angry-bg {
+    background-color: #FFEFE5;
+}
+.upset-bg {
+    background-color: #EBF0FF;
+}
+.sad-bg {
+    background-color: #EDFEFF;
+}
+.good-bg {
+    background-color: #FFFBED;
+}
+.happy-bg {
+    background-color: #F5F9FF;
+}
+.spectacular-bg {
+    background-color: #FFF0F3;
 }

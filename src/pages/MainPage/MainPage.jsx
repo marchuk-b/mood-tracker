@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel'
 import './MainPage.css'
 
-export const MainPage = () => {
+export const MainPage = ({onCardChange}) => {
     const cardsData = [
         {id: 1, name: 'Angry', className: 'angry', emoji: require('../../assets/emoji/angry.png'), colorIndicator: '#FF843E'},
         {id: 2, name: 'Upset', className: 'upset', emoji: require('../../assets/emoji/upset.png'), colorIndicator: '#8CA4EE'},
@@ -14,29 +14,24 @@ export const MainPage = () => {
     const [selectedCard, setSelectedCard] = useState(cardsData[0]);
     const [noteText, setNoteText] = useState('');
     const [moodToday, setMoodToday] = useState(null);
+    const [noteToday, setNoteToday] = useState(null);
 
     const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || [];
     const dateToday = new Date().toISOString().split("T")[0]; 
     const moodCardData = moodToday ? cardsData.find(c => c.name === moodToday.mood) : null;
 
     useEffect(() => {
-        const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || []; 
-        const dateToday = new Date().toISOString().split("T")[0];
-
         const moodTodayFromStorage = moodsFromStorage.filter((mood) => mood.date === dateToday)[0];
 
-        if (moodTodayFromStorage) setMoodToday(moodTodayFromStorage);
-    }, [])
-
-    useEffect(() => {
-        if (moodToday?.note) {
-            setNoteText(moodToday.note);
-        }
-    }, [moodToday]);
-
+        if (moodTodayFromStorage) {
+            setMoodToday(moodTodayFromStorage);
+            setNoteToday(moodTodayFromStorage.note);
+        };
+    }, [dateToday])
 
     const getSelectedCard = (card) => {
         setSelectedCard(card)
+        onCardChange(card)
     };
 
     const saveMood = (selectedCard) => {
@@ -77,6 +72,7 @@ export const MainPage = () => {
             })
             localStorage.setItem("moodEntries", JSON.stringify(updatedMoods));
             alert("Note saved successfully!");
+            setNoteToday(noteText);
             setNoteText('');
         } catch (error) {
             console.error(error);
@@ -85,7 +81,7 @@ export const MainPage = () => {
 
 
     return (
-        <div className={`mainpage ${moodCardData ? moodCardData?.className : selectedCard?.className}`}>
+        <div className='mainpage'>
             {!moodToday && (
                 <>
                     <CardCarousel 
@@ -104,15 +100,25 @@ export const MainPage = () => {
                         <div className="mainpage-moodcard__name">{moodToday.mood}</div>
                         <img className='mainpage-moodcard__img' src={cardsData.find(c => c.name === moodToday.mood)?.emoji} alt="" />
                     </div>
-                    <div className="input-text">
-                        <textarea 
-                            className='input-text__input' 
-                            value={noteText} 
-                            onChange={(e) => setNoteText(e.target.value)} 
-                            placeholder='Why do you have this mood?'
-                        />
-                        <button className='carousel__btn' onClick={() => addTextToEntries()}>Add note</button>
-                    </div>
+                    
+                    {!noteToday && (
+                        <div className="input-text">
+                            <textarea 
+                                className='input-text__input' 
+                                value={noteText} 
+                                onChange={(e) => setNoteText(e.target.value)} 
+                                placeholder='Why do you have this mood?'
+                            />
+                            <button className='carousel__btn' onClick={() => addTextToEntries()}>Add note</button>
+                        </div>
+                    )}
+
+                    {noteToday && (
+                        <div className='mainpage-moodcard__note'>
+                            <div className="mainpage-moodcard__note-title">Note:</div>
+                            <div className="mainpage-moodcard__note-text">{noteToday}</div>
+                        </div>
+                    )}
                 </>
             )}
         </div>
