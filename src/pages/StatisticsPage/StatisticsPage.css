@@ -1,0 +1,6 @@
+.statspage {
+    padding: 40px 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
