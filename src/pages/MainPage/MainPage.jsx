@@ -1,84 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel'
 import './MainPage.css'
+import { MoodContext } from '../../hooks/MoodContext'
 
 export const MainPage = ({onCardChange}) => {
-    const cardsData = [
-        {id: 1, name: 'Angry', className: 'angry', emoji: require('../../assets/emoji/angry.png'), colorIndicator: '#FF843E'},
-        {id: 2, name: 'Upset', className: 'upset', emoji: require('../../assets/emoji/upset.png'), colorIndicator: '#8CA4EE'},
-        {id: 3, name: 'Sad', className: 'sad', emoji: require('../../assets/emoji/sad.png'), colorIndicator: '#A1E7EB'},
-        {id: 4, name: 'Good', className: 'good', emoji: require('../../assets/emoji/good.png'), colorIndicator: '#FDDD6F'},
-        {id: 5, name: 'Happy', className: 'happy', emoji: require('../../assets/emoji/happy.png'), colorIndicator: '#DFEBFF'},
-        {id: 6, name: 'Spectacular', className: 'spectacular', emoji: require('../../assets/emoji/spectacular.png'), colorIndicator: '#FFA7BC'},
-    ] 
+    const {cardsData, moodToday, noteToday, saveMood, addTextToEntries, noteText, setNoteText} = useContext(MoodContext);
     const [selectedCard, setSelectedCard] = useState(cardsData[0]);
-    const [noteText, setNoteText] = useState('');
-    const [moodToday, setMoodToday] = useState(null);
-    const [noteToday, setNoteToday] = useState(null);
 
-    const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || [];
-    const dateToday = new Date().toISOString().split("T")[0]; 
     const moodCardData = moodToday ? cardsData.find(c => c.name === moodToday.mood) : null;
-
-    useEffect(() => {
-        const moodTodayFromStorage = moodsFromStorage.filter((mood) => mood.date === dateToday)[0];
-
-        if (moodTodayFromStorage) {
-            setMoodToday(moodTodayFromStorage);
-            setNoteToday(moodTodayFromStorage.note);
-        };
-    }, [dateToday])
 
     const getSelectedCard = (card) => {
         setSelectedCard(card)
         onCardChange(card)
-    };
-
-    const saveMood = (selectedCard) => {
-        try {
-          const existingMoodToday = moodsFromStorage.filter((mood) => {
-            return mood.date === dateToday;
-          });
-    
-          if (existingMoodToday.length !== 0) {
-            return alert("Today you already choosed your mood");
-          };
-    
-          const selectedMood = {
-            mood: selectedCard.name,
-            note: noteText,
-            date: dateToday,
-          };
-    
-          moodsFromStorage.push(selectedMood);
-          localStorage.setItem("moodEntries", JSON.stringify(moodsFromStorage));
-          alert("Mood saved successfully!");
-          setMoodToday(selectedMood);
-        } catch (error) {
-          console.error(error);
-        }
-    }    
-
-    const addTextToEntries = () => {
-        try {
-            const updatedMoods = moodsFromStorage.map((moodEntry) => {
-                if (moodEntry.date === dateToday) {
-                    return {
-                        ...moodEntry,
-                        note: noteText 
-                    };
-                };
-                return moodEntry;
-            })
-            localStorage.setItem("moodEntries", JSON.stringify(updatedMoods));
-            alert("Note saved successfully!");
-            setNoteToday(noteText);
-            setNoteText('');
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
+    };  
 
     return (
         <div className='mainpage'>
@@ -90,7 +24,6 @@ export const MainPage = ({onCardChange}) => {
                     />
                     <button className='carousel__btn' onClick={() => saveMood(selectedCard)}>Select mood</button>
                 </>
-                
             )}
 
             {moodToday && moodCardData && (
@@ -114,7 +47,7 @@ export const MainPage = ({onCardChange}) => {
                     )}
 
                     {noteToday && (
-                        <div className='mainpage-moodcard__note'>
+                        <div className={`mainpage-moodcard__note ${cardsData.find(c => c.name === moodToday.mood)?.className}`}>
                             <div className="mainpage-moodcard__note-title">Note:</div>
                             <div className="mainpage-moodcard__note-text">{noteToday}</div>
                         </div>

@@ -3,14 +3,13 @@ import './App.css';
 import { Navbar } from './components/Navbar/Navbar';
 import { MainPage } from './pages/MainPage/MainPage';
 import { StatisticsPage } from './pages/StatisticsPage/StatisticsPage';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { MoodContext } from './hooks/MoodContext';
 
 function App() {
-  const [backColor, setBackColor] = useState('#FFFFFF');
+  const {dateToday, moodsFromStorage} = useContext(MoodContext);
+  const [backColor, setBackColor] = useState('#FFEFE5');
   const [selectedCard, setSelectedCard] = useState(null);
-  
-  const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || [];
-  const dateToday = new Date().toISOString().split("T")[0]; 
 
   const getSelectedCard = (card) => {
     setSelectedCard(card);
@@ -23,18 +22,16 @@ function App() {
       const moodClass = moodTodayFromStorage.mood.toLowerCase();
       setBackColor(moodClass);
     } else if (selectedCard) {
-      setBackColor(selectedCard.className || '#FFFFFF');
+      setBackColor(selectedCard.className);
+    } else {
+      setBackColor('angry'); // Default color if no mood is selected
     }
-  }, [moodsFromStorage, dateToday]);
+  }, [selectedCard, dateToday]);
 
   return (
     <div className='app'>
       <div className='container'>
-        <div className={`app__content ${backColor}-bg`}>
-          {/* <header className='header'>
-            <a href='/' className='header__link'>Mood Tracker</a>
-          </header> */}
-      
+        <div className={`app__content ${backColor}-bg`}>      
           <main className='main'>
             <Routes>
               <Route path='/' element={<MainPage onCardChange={getSelectedCard} />} />
