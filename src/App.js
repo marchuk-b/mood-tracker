@@ -4,7 +4,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { MainPage } from './pages/MainPage/MainPage';
 import { StatisticsPage } from './pages/StatisticsPage/StatisticsPage';
 import { useContext, useEffect, useState } from 'react';
-import { MoodContext } from './hooks/MoodContext';
+import { MoodContext } from './context/MoodContext';
 
 function App() {
   const {dateToday, moodsFromStorage} = useContext(MoodContext);

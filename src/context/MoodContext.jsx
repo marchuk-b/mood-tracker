@@ -4,20 +4,22 @@ const MoodContext = createContext(null);
 
 function MoodProvider({ children }) {
     const cardsData = [
-        {id: 1, name: 'Angry', className: 'angry', emoji: require('../assets/emoji/angry.png'), colorIndicator: '#FF843E'},
-        {id: 2, name: 'Upset', className: 'upset', emoji: require('../assets/emoji/upset.png'), colorIndicator: '#8CA4EE'},
-        {id: 3, name: 'Sad', className: 'sad', emoji: require('../assets/emoji/sad.png'), colorIndicator: '#A1E7EB'},
-        {id: 4, name: 'Good', className: 'good', emoji: require('../assets/emoji/good.png'), colorIndicator: '#FDDD6F'},
-        {id: 5, name: 'Happy', className: 'happy', emoji: require('../assets/emoji/happy.png'), colorIndicator: '#DFEBFF'},
-        {id: 6, name: 'Spectacular', className: 'spectacular', emoji: require('../assets/emoji/spectacular.png'), colorIndicator: '#FFA7BC'},
+        {id: 1, name: 'Angry', className: 'angry', emoji: require('../assets/emoji/angry.png'), colorIndicator: '#FF843E', colorFont: '#782E04'},
+        {id: 2, name: 'Upset', className: 'upset', emoji: require('../assets/emoji/upset.png'), colorIndicator: '#8CA4EE', colorFont: '#313A54'},
+        {id: 3, name: 'Sad', className: 'sad', emoji: require('../assets/emoji/sad.png'), colorIndicator: '#A1E7EB', colorFont: '#3A7478'},
+        {id: 4, name: 'Good', className: 'good', emoji: require('../assets/emoji/good.png'), colorIndicator: '#FDDD6F', colorFont: '#664F00'},
+        {id: 5, name: 'Happy', className: 'happy', emoji: require('../assets/emoji/happy.png'), colorIndicator: '#DFEBFF', colorFont: '#505D87'},
+        {id: 6, name: 'Spectacular', className: 'spectacular', emoji: require('../assets/emoji/spectacular.png'), colorIndicator: '#FFA7BC', colorFont: '#4D3238' },
     ]; 
 
     const [moodToday, setMoodToday] = useState(null);
-    const moodsFromStorage = JSON.parse(localStorage.getItem("moodEntries")) || [];
+    const [moodsFromStorage, setMoodsFromStorage] = useState(() => {
+        return JSON.parse(localStorage.getItem("moodEntries")) || [];
+    });
     const dateToday = new Date().toISOString().split("T")[0]; 
     const [noteText, setNoteText] = useState('');
     const [noteToday, setNoteToday] = useState(null);
-    // const moodCardData = moodToday ? cardsData.find(c => c.name === moodToday.mood) : null;
+    const moodCardData = moodToday ? cardsData.find(c => c.name === moodToday.mood) : cardsData[0];
 
     useEffect(() => {
         const moodTodayFromStorage = moodsFromStorage.filter((mood) => mood.date === dateToday)[0];
@@ -28,7 +30,7 @@ function MoodProvider({ children }) {
         };
     }, [dateToday])
 
-        const saveMood = (selectedCard) => {
+    const saveMood = (selectedCard) => {
         try {
           const existingMoodToday = moodsFromStorage.filter((mood) => {
             return mood.date === dateToday;
@@ -46,6 +48,7 @@ function MoodProvider({ children }) {
     
           moodsFromStorage.push(selectedMood);
           localStorage.setItem("moodEntries", JSON.stringify(moodsFromStorage));
+          setMoodsFromStorage([...moodsFromStorage, selectedMood]);
           alert("Mood saved successfully!");
           setMoodToday(selectedMood);
         } catch (error) {
@@ -65,6 +68,7 @@ function MoodProvider({ children }) {
                 return moodEntry;
             })
             localStorage.setItem("moodEntries", JSON.stringify(updatedMoods));
+            setMoodsFromStorage(updatedMoods);
             alert("Note saved successfully!");
             setNoteToday(noteText);
             setNoteText('');
@@ -75,7 +79,7 @@ function MoodProvider({ children }) {
 
     return (
         <MoodContext.Provider value={{ 
-            moodToday, noteToday, dateToday, cardsData, 
+            moodToday, moodCardData, noteToday, dateToday, cardsData, 
             moodsFromStorage, saveMood, addTextToEntries, noteText, setNoteText 
         }}>
             {children}

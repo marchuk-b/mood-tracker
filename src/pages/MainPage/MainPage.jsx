@@ -1,13 +1,11 @@
 import { useContext, useState } from 'react'
 import { CardCarousel } from '../../components/CardCarousel/CardCarousel'
 import './MainPage.css'
-import { MoodContext } from '../../hooks/MoodContext'
+import { MoodContext } from '../../context/MoodContext'
 
 export const MainPage = ({onCardChange}) => {
-    const {cardsData, moodToday, noteToday, saveMood, addTextToEntries, noteText, setNoteText} = useContext(MoodContext);
+    const {cardsData, moodCardData, moodToday, noteToday, saveMood, addTextToEntries, noteText, setNoteText} = useContext(MoodContext);
     const [selectedCard, setSelectedCard] = useState(cardsData[0]);
-
-    const moodCardData = moodToday ? cardsData.find(c => c.name === moodToday.mood) : null;
 
     const getSelectedCard = (card) => {
         setSelectedCard(card)
