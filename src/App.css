@@ -1,6 +1,7 @@
 body {
     font-family: "Rubik", sans-serif;
     font-weight: 800;
+    background: #fff;
 }
 
 *,
@@ -10,9 +11,10 @@ body {
 }
 
 .container {
-    max-width: 375px;
+    max-width: 380px;
     width: 100%;
     margin: 0 auto;
+    position: relative;
 }
 .app {
     height: 100%;
@@ -26,9 +28,13 @@ body {
 
 .main {
     flex: 1;
+    margin-bottom: 100px;
 }
 .footer {
-    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    max-width: 380px;
+    width: 100%;
 }
 
 .angry {
