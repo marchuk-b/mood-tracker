@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar } from './components/Navbar/Navbar';
 import { MainPage } from './pages/MainPage/MainPage';
 import { StatisticsPage } from './pages/StatisticsPage/StatisticsPage';
+import { CalendarPage } from './pages/CalendarPage/CalendarPage';
 import { useContext, useEffect, useState } from 'react';
 import { MoodContext } from './context/MoodContext';
 
@@ -36,6 +37,7 @@ function App() {
             <Routes>
               <Route path='/' element={<MainPage onCardChange={getSelectedCard} />} />
               <Route path='/statistics' element={<StatisticsPage />} />
+              <Route path='/calendar' element={<CalendarPage />} />
               <Route path='*' element={<div>Page Not Found</div>} />
             </Routes>
           </main>
