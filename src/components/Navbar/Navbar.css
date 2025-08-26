@@ -1,28 +1,20 @@
 .navbar {
     padding: 20px 0;
     text-align: center;
-    background-color: #444;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 .navbar__link {
     display: block;
-
-    /* background-color: #FFEFE5;
-    color: #754242; */
-
-    background-color: #f2f2f2;
-    color: #444;
     font-size: 24px;
     font-weight: 500;
-    border: none;
+    border: 3px outset;
     border-radius: 14px;
     padding: 10px 15px;
     cursor: pointer;
     transition: all .3s linear;
 }
 .navbar__link:hover {
-    background-color: #b4b4b4;
-    color: #444;
+    filter: brightness(0.85) saturate(1.3);
 }
