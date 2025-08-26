@@ -3,8 +3,9 @@ import "./MoodCalendar.css"
 import { useContext } from "react";
 import { MoodContext } from "../../context/MoodContext";
 
-export const MoodCalendar = ({moodCard}) => {
+export const MoodCalendar = ({moodCard, onChangeMonth}) => {
   const { moodsFromStorage, cardsData } = useContext(MoodContext);
+
 
   const getMoodClassForDate = (date) => {
     const dateStr = date.toISOString().split('T')[0];
@@ -25,6 +26,7 @@ export const MoodCalendar = ({moodCard}) => {
             return moodClass ? `${moodClass}-cal` : null;
           }
       }}
+      onActiveStartDateChange={onChangeMonth}
     />
     </div>
   )

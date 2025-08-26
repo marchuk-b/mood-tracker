@@ -48,7 +48,6 @@ function MoodProvider({ children }) {
     
           moodsFromStorage.push(selectedMood);
           localStorage.setItem("moodEntries", JSON.stringify(moodsFromStorage));
-          setMoodsFromStorage([...moodsFromStorage, selectedMood]);
           alert("Mood saved successfully!");
           setMoodToday(selectedMood);
         } catch (error) {
